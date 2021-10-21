@@ -1,0 +1,28 @@
+
+<div class="row">
+<div class="col-1"></div>
+<div class="my-3 py-3 col-11" >
+<% if @post.errors.any? %>
+  <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model:@post do |form|%>
+
+    <%= form.label :title%>
+    <br>
+   
+    <%= form.text_field :title%>
+    
+    <br>
+    <%= form.label :body%>
+    <br>
+    <%= form.text_area :body%>
+    <br>
+    <%= form.submit nil, class:"btn btn-outline-primary" %>
+<% end %>
+</div>
+</div>
+

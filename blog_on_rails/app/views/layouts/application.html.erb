@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlogOnRails</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-sm justify-content-between navbar-light bg-light">
+    <ul class="nav ">
+      <a href="/" class="nav-link">Blog On Rails</a>
+    </ul>
+    <ul class="nav">
+      <a href="/posts" class="nav-link">Home</a>
+      <a href="/posts/new" class="nav-link">New Post</a>
+    </ul>
+  </nav>
+  
+    <%= yield %>
+  </body>
+</html>
