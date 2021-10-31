@@ -1,0 +1,63 @@
+<div class="ml-3 mt-3 mb-3 mr-3">
+
+ <div class="card-body">
+<h1 class="card-title"><%= @post.title%> </h1>
+
+<p class="card-text"><%= @post.body%></p>
+ </div>
+<small> Posted <%= time_ago_in_words(@post.created_at) %> ago</small>
+<br>
+<h5>
+    Created by: <%= @post.user.name %>
+</h5>
+
+<button type="button" class="btn btn-outline-primary">
+<%= link_to("Edit", edit_post_path(@post.id)) %>
+</button>
+
+<button type="button" class="btn btn-outline-primary">
+    <%= link_to("Delete", post_path(@post.id) ,method: :delete, data:{confirm:"Are you sure?"}) %>
+</button>
+
+<br><br><br>
+
+
+
+<%= form_with(model: [@post, @comment]) do |form|%>
+
+
+    <p class="font-weight-bold"><%= form.label :Comment%></p>
+    
+    <%= form.text_area :body%>
+
+    <br>
+
+<%= form.submit "Submit", class:"btn btn-outline-primary" %>
+
+
+
+<% end %>
+<ul>
+    <% @comments.each do |comment| %>
+        
+            <%= comment.body %>
+            <br>
+           
+            <small>
+            
+               Commented  <%= time_ago_in_words(comment.created_at) %> ago
+                <h5>
+            Created by: <%= comment.user.name %>
+        </h5>
+               <li>
+              
+              <%= link_to("Delete", post_comment_path(@post.id, comment) ,method: :delete, data:{confirm:"Are you sure?"}) %>
+              
+              </li>
+            </small>
+        
+    <% end %>
+</ul>
+</div>
+
+

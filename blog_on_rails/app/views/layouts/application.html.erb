@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlogOnRails</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-sm justify-content-between navbar-light bg-light">
+    <ul class="nav ">
+      <a href="/" class="nav-link">Blog On Rails</a>
+    </ul>
+    <ul class="nav">
+      <a href="/posts" class="nav-link">Home</a>
+      <a href="/posts/new" class="nav-link">New Post</a>
+    </ul>
+    
+        <% if user_signed_in? %>
+          Hello <%= link_to current_user.name , edit_user_path(current_user), method: :GET %>
+         <%= link_to "Change Password" , edit_password_path(current_user), method: :GET %>
+          <%= link_to "Logout", session_path, method: :delete, data: {confirm: "Are you sure you want to logout?"} %>
+        <% else %>
+        <%=  link_to  'Log in', new_session_path  %>
+          
+        <%=  link_to  'Sign Up', new_user_path  %>
+        <% end %>
+  </nav>
+  <% if flash[:notice].present?%>
+        <div class="alert alert-success aler-dismissible fade show" role="alert">
+          <%= flash[:notice]%>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">
+            &times;
+          </span>
+          </button>
+        </div>
+    <% elsif flash[:alert].present?%>
+      <div class="alert alert-danger aler-dismissible fade show" role="alert">
+          <%= flash[:alert]%>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">
+            &times;
+          </span>
+          </button>
+        </div>
+    <% end %>
+  
+    <%= yield %>
+  </body>
+</html>
