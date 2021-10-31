@@ -41,9 +41,9 @@ class Ability
       user == comment.user
     end
    
-    can(:update, User) do|username|
+    can(:update, User) do|user|
       
-      user == username
+      user == current_user
        
     end
  
